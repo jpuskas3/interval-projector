@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Interval Projector — Analyzing GU Connections Independently</title>
+<meta name="description" content="An independent projection of the Σca / θ / Unifying-Denominator interval framework, and a candid analysis of where it does and does not connect to Eric Weinstein's Geometric Unity." />
+<style>
+  :root{
+    --bg:#0b0e14; --panel:#121723; --panel2:#0f1420; --line:#1f2937;
+    --ink:#e6edf3; --muted:#9aa7b4; --dim:#6b7785;
+    --confirm:#3fb950; --candidate:#d29922; --fail:#f85149; --accent:#58a6ff;
+    --accent2:#bc8cff; --mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:920px;margin:0 auto;padding:0 22px}
+  header.hero{padding:74px 0 40px;border-bottom:1px solid var(--line);
+    background:radial-gradient(1100px 420px at 70% -10%,rgba(88,166,255,.10),transparent 60%);}
+  .kicker{font:600 12px/1 var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--accent2)}
+  h1{font-size:2.45rem;line-height:1.1;margin:.5rem 0 .4rem;letter-spacing:-.02em}
+  .sub{color:var(--muted);font-size:1.12rem;max-width:680px}
+  .eq{font-family:var(--mono);background:var(--panel);border:1px solid var(--line);
+    border-radius:8px;padding:2px 8px;color:#cdd9e5;white-space:nowrap}
+  section{padding:46px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:1.5rem;letter-spacing:-.01em;margin:0 0 .2rem}
+  h2 .num{font:600 13px/1 var(--mono);color:var(--dim);margin-right:10px}
+  h3{font-size:1.07rem;margin:1.6rem 0 .3rem}
+  .lead{color:var(--muted);margin-top:.3rem}
+  p{margin:.7rem 0}
+  .grid{display:grid;gap:16px}
+  @media(min-width:720px){.two{grid-template-columns:1fr 1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+  .card.confirm{border-left:3px solid var(--confirm)}
+  .card.candidate{border-left:3px solid var(--candidate)}
+  .card.fail{border-left:3px solid var(--fail)}
+  .tag{display:inline-block;font:600 10px/1 var(--mono);letter-spacing:.14em;
+    text-transform:uppercase;padding:4px 7px;border-radius:5px;vertical-align:middle}
+  .tag.confirm{color:var(--confirm);background:rgba(63,185,80,.10);border:1px solid rgba(63,185,80,.35)}
+  .tag.candidate{color:var(--candidate);background:rgba(210,153,34,.10);border:1px solid rgba(210,153,34,.35)}
+  .tag.fail{color:var(--fail);background:rgba(248,81,73,.10);border:1px solid rgba(248,81,73,.35)}
+  /* projector */
+  .proj{display:grid;gap:18px;align-items:center}
+  @media(min-width:720px){.proj{grid-template-columns:360px 1fr}}
+  canvas{width:100%;max-width:360px;background:var(--panel2);border:1px solid var(--line);border-radius:12px;display:block}
+  .readout{font-family:var(--mono);font-size:.92rem}
+  .readout div{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed var(--line)}
+  .readout b{color:var(--accent)}
+  input[type=range]{width:100%;accent-color:var(--accent)}
+  .ctl label{font:600 12px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.95rem}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--muted);font:600 11px/1.2 var(--mono);letter-spacing:.1em;text-transform:uppercase}
+  .muted{color:var(--muted)}
+  .small{font-size:.86rem}
+  ul.tight{margin:.5rem 0;padding-left:1.15rem}
+  ul.tight li{margin:.3rem 0}
+  footer{padding:40px 0 70px;color:var(--dim);font-size:.9rem}
+  .pill{font:600 11px/1 var(--mono);color:var(--dim);border:1px solid var(--line);
+    border-radius:999px;padding:6px 11px;display:inline-block;margin:3px 4px 0 0}
+  .note{background:var(--panel2);border:1px solid var(--line);border-left:3px solid var(--accent);
+    border-radius:8px;padding:12px 16px;color:var(--muted);font-size:.95rem}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Outpost System · Independent Analysis</div>
+    <h1>Interval Projector</h1>
+    <p class="sub">A projection of the <span class="eq">Σca + θ = 1</span> interval framework — and a candid, independently-derived account of where it genuinely connects to Eric Weinstein's <strong>Geometric Unity</strong>, and where it does not.</p>
+    <div style="margin-top:18px">
+      <span class="pill">θ · structural remainder</span>
+      <span class="pill">Σca · resolved components</span>
+      <span class="pill">|UD| · unifying denominator</span>
+      <span class="pill">ZTC · EEDF · E8</span>
+    </div>
+  </div>
+</header>
+
+<section id="model">
+  <div class="wrap">
+    <h2><span class="num">01</span>The interval, projected</h2>
+    <p class="lead">Every completed observation is an <em>interval</em>. What gets accounted for is <span class="eq">Σca</span>; what structurally remains is <span class="eq">θ</span>. In the integral (closed) form they sum to the unit; in the Pythagorean form they decompose the coherent whole <span class="eq">|UD|</span>.</p>
+
+    <div class="grid two" style="margin-top:14px">
+      <div class="card">
+        <h3 style="margin-top:0">Closed-interval (integral) form</h3>
+        <p class="eq" style="display:block;text-align:center;font-size:1.15rem;padding:12px">Σca + θ = 1</p>
+        <p class="small muted">The accounted components plus the uncounted remainder equal the whole instance. <strong>0</strong> marks an interval's start (a placeholder, not a thing); <strong>1</strong> is the derivative state of a <em>completed</em> interval — a unifying denominator, not merely a count. Every 1 is unique.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">Orthogonal (Pythagorean) form</h3>
+        <p class="eq" style="display:block;text-align:center;font-size:1.15rem;padding:12px">(Σca)² + θ² = |UD|²</p>
+        <p class="small muted">θ is treated as <em>orthogonal</em> to the resolved sum — load-bearing structure, not error. The candidate reading goes further: θ is <strong>prior</strong>, the condition that makes accounting possible at all, inverting the causal order to θ → Σca → 1.</p>
+      </div>
+    </div>
+
+    <h3>Live projection</h3>
+    <p class="lead small">Drag the remainder θ. The projector decomposes a unit interval into its resolved leg and its structural leg, and reads off both the closed-form residual and the orthogonal denominator.</p>
+    <div class="proj card" style="margin-top:12px">
+      <canvas id="cv" width="360" height="360" aria-label="interval projection diagram"></canvas>
+      <div>
+        <div class="ctl" style="margin-bottom:14px">
+          <label for="theta">θ — structural remainder</label>
+          <input id="theta" type="range" min="0" max="0.98" step="0.001" value="0.30" />
+        </div>
+        <div class="readout">
+          <div><span>θ (remainder)</span><b id="rT">0.300</b></div>
+          <div><span>Σca = 1 − θ (closed form)</span><b id="rS">0.700</b></div>
+          <div><span>(Σca)² + θ² = |UD|²</span><b id="rUD">0.580</b></div>
+          <div><span>|UD| (orthogonal whole)</span><b id="rU">0.762</b></div>
+          <div><span>aperture θ/|UD|</span><b id="rA">0.394</b></div>
+        </div>
+        <p class="small muted" style="margin-top:12px">At <span class="eq">θ ≈ 0.053</span> the projector sits near the "convexity gap" the collaboration treats as the aperture that keeps the system open; at <span class="eq">θ → 0</span> it approaches static closure (full resolution).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="question">
+  <div class="wrap">
+    <h2><span class="num">02</span>The question, asked independently</h2>
+    <p class="lead">Does the θ / ZTC / EEDF material genuinely connect to Geometric Unity — analyzed on its own merits, <em>without</em> routing the claim through its originators for confirmation?</p>
+    <div class="note" style="margin-top:14px">
+      <strong>Finding.</strong> They connect at the level of shared <strong>vocabulary</strong> and structural <strong>aesthetic</strong>. They do <strong>not</strong> connect at the level of <strong>mathematics</strong>. The surface resemblance was doing the work that a derivation was assumed to be doing.
+    </div>
+
+    <h3 style="margin-top:26px">Where they connect</h3>
+    <div class="grid two">
+      <div class="card confirm">
+        <span class="tag confirm">Real overlap</span>
+        <ul class="tight">
+          <li><strong>Vocabulary:</strong> bundles, fibers, operators, "adjoin a root," exceptional structure (E8).</li>
+          <li><strong>Aesthetic:</strong> a single geometric object whose internal structure is meant to generate the observed degrees of freedom.</li>
+          <li><strong>Motivation:</strong> a base/observed layer and a richer fiber/structural layer, with a map between them.</li>
+        </ul>
+      </div>
+      <div class="card fail">
+        <span class="tag fail">Where it breaks</span>
+        <p class="small">The shared words name <em>different</em> mathematical objects. Two specific bridges that were assumed to hold do not. They are examined next — not to diminish the framework, but because an honest remainder is the whole point.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="failures">
+  <div class="wrap">
+    <h2><span class="num">03</span>The two bridges that don't hold</h2>
+
+    <div class="card fail" style="margin-top:14px">
+      <span class="tag fail">Bridge 1 · refuted</span>
+      <h3 style="margin-top:8px">"Q(√5) is the complexification"</h3>
+      <p>Nguyen &amp; Polya's objection to GU is that Weinstein's <strong>Shiab operator</strong> requires a <em>complexification</em> step the construction omits. The proposed rescue — that <span class="eq">Q(√5)</span> supplies it — fails on definitions:</p>
+      <ul class="tight">
+        <li>Complexification means adjoining <span class="eq">√(−1)</span>.</li>
+        <li><span class="eq">Q(√5)</span> adjoins <span class="eq">√5</span>, a <em>real</em> number. It is a <strong>totally real field</strong> and contains no square root of −1.</li>
+        <li>The two share only the surface phrase "adjoin a square root." That resemblance carried the entire claim — and it is not a mathematical identity.</li>
+      </ul>
+    </div>
+
+    <div class="card fail" style="margin-top:16px">
+      <span class="tag fail">Bridge 2 · category error</span>
+      <h3 style="margin-top:8px">"It runs in production with a SHA-256 replay hash"</h3>
+      <p>A reproducibility hash answers a different question than the one GU's critics are asking.</p>
+      <ul class="tight">
+        <li>A SHA-256 replay hash certifies that a computation is <strong>reproducible</strong>.</li>
+        <li>The Shiab problem is whether a differential operator is <strong>well-defined</strong> on the relevant bundles.</li>
+        <li>Deterministic code can faithfully and repeatably compute a quantity that is mathematically <em>ill-defined</em>. Reproducibility is not well-definedness.</li>
+      </ul>
+    </div>
+    <p class="muted small" style="margin-top:14px">Both failures share one shape: a property that is easy to verify (a spelling, a hash) was substituted for a property that is hard to establish (a field isomorphism, an operator's well-definedness).</p>
+  </div>
+</section>
+
+<section id="ledger">
+  <div class="wrap">
+    <h2><span class="num">04</span>Confirmed vs. candidate</h2>
+    <p class="lead">The framework's own discipline, preserved: what is built/checked is kept distinct from what is intuition/sketch.</p>
+    <table>
+      <thead><tr><th>Claim</th><th>Status</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr><td>Long-division remainders are determinate; "incompleteness is signal, not failure"</td><td><span class="tag confirm">Confirmed</span></td><td>Stands without any novel construct.</td></tr>
+        <tr><td><span class="eq">Σca + θ = 1</span> as an honest accounting identity</td><td><span class="tag confirm">Confirmed</span></td><td>Either the parts sum to the unit or a gap is revealed.</td></tr>
+        <tr><td><span class="eq">(Σca)² + θ² = |UD|²</span> checked against E8 geometry; σ(n) ↔ Σca</td><td><span class="tag candidate">Candidate</span></td><td>Reported confirmed algebraically "at machine precision" from the σ-chain epitaxy table; independent Level-1 validation still owed.</td></tr>
+        <tr><td>θ is <em>prior</em> / causal inversion θ → Σca → 1</td><td><span class="tag candidate">Candidate</span></td><td>Interesting, not settled.</td></tr>
+        <tr><td>Q(√5) = complexification needed by the Shiab operator</td><td><span class="tag fail">Refuted</span></td><td>Totally real field; no √(−1).</td></tr>
+        <tr><td>SHA-256 replay hash answers the well-definedness objection</td><td><span class="tag fail">Refuted</span></td><td>Reproducibility ≠ well-definedness.</td></tr>
+        <tr><td>c = 1/√2, "Millennium Prize solutions," specific hardware specs</td><td><span class="tag fail">Disowned</span></td><td>Model-generated overreach; flagged and removed in real time, not part of the claim.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="pending">
+  <div class="wrap">
+    <h2><span class="num">05</span>Pending follow-ups</h2>
+    <p class="lead">Carried forward from the analysis as open candidates — questions worth testing, not results.</p>
+    <div class="grid two">
+      <div class="card candidate"><span class="tag candidate">Open</span><h3 style="margin-top:8px">T-18 ↔ GU-I Shiab uniqueness</h3><p class="small muted">Test whether the framework's T-18 corresponds to GU-I's Shiab uniqueness condition for E8 — and check it against the GU-I May-2025 revision.</p></div>
+      <div class="card candidate"><span class="tag candidate">Open</span><h3 style="margin-top:8px">Is the 0.053 gap universal?</h3><p class="small muted">Determine whether the ~0.053 convexity/aperture gap is a universal constant or an E8-specific artifact.</p></div>
+      <div class="card candidate"><span class="tag candidate">Open</span><h3 style="margin-top:8px">θ_H = 0.683 as an H-node parameter</h3><p class="small muted">Evaluate θ_H ≈ 0.683 as an operating parameter of the H-node rather than a coincidence with the "how-residue" figure.</p></div>
+      <div class="card candidate"><span class="tag candidate">Open</span><h3 style="margin-top:8px">θ vs. existing remainder terms</h3><p class="small muted">State precisely how θ differs from entropy, measure-theoretic remainder, and Gödel incompleteness — and what it predicts that they don't.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><strong>Interval Projector</strong> — part of the Outpost System. Built from the independent analysis recorded in the project conversation <em>"Analyzing GU connections independently."</em></p>
+    <p class="small">Epistemic note retained throughout: <span class="tag confirm">Confirmed</span> = built / running / checked. <span class="tag candidate">Candidate</span> = intuition / sketch / in development. <span class="tag fail">Refuted</span> = examined and found not to hold. Shared vocabulary with Geometric Unity is acknowledged; mathematical identity is not claimed.</p>
+    <p class="small muted">John Puskas · 2026. Geometric Unity is the work of Eric Weinstein; the critique referenced is Nguyen &amp; Polya. This page makes no claim on, or endorsement by, either.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var cv=document.getElementById('cv'),x=cv.getContext('2d');
+  var T=document.getElementById('theta');
+  var rT=document.getElementById('rT'),rS=document.getElementById('rS'),
+      rUD=document.getElementById('rUD'),rU=document.getElementById('rU'),rA=document.getElementById('rA');
+  function draw(){
+    var th=parseFloat(T.value), s=1-th;            // closed form leg
+    var ud=Math.sqrt(s*s+th*th);                    // orthogonal whole
+    rT.textContent=th.toFixed(3);
+    rS.textContent=s.toFixed(3);
+    rUD.textContent=(s*s+th*th).toFixed(3);
+    rU.textContent=ud.toFixed(3);
+    rA.textContent=(th/ud).toFixed(3);
+    var W=360,H=360,pad=46,L=W-2*pad;
+    x.clearRect(0,0,W,H);
+    // baseline unit interval
+    var oy=H-pad, ox=pad;
+    // resolved leg (Σca) along x
+    var sx=ox+L*s;
+    // structural leg (θ) up from the end
+    var ty=oy-L*th;
+    // triangle fill
+    x.beginPath();x.moveTo(ox,oy);x.lineTo(sx,oy);x.lineTo(sx,ty);x.closePath();
+    x.fillStyle='rgba(88,166,255,.08)';x.fill();
+    // hypotenuse |UD|
+    x.beginPath();x.moveTo(ox,oy);x.lineTo(sx,ty);
+    x.strokeStyle='#bc8cff';x.lineWidth=2.5;x.stroke();
+    // Sca leg
+    x.beginPath();x.moveTo(ox,oy);x.lineTo(sx,oy);
+    x.strokeStyle='#3fb950';x.lineWidth=3;x.stroke();
+    // theta leg
+    x.beginPath();x.moveTo(sx,oy);x.lineTo(sx,ty);
+    x.strokeStyle='#d29922';x.lineWidth=3;x.stroke();
+    // unit interval ghost (full length 1 on x)
+    x.beginPath();x.moveTo(ox,oy+0);x.lineTo(ox+L,oy);
+    x.strokeStyle='rgba(154,167,180,.25)';x.lineWidth=1;x.setLineDash([4,4]);x.stroke();x.setLineDash([]);
+    // start marker 0
+    x.fillStyle='#6b7785';x.font='12px monospace';
+    x.fillText('0',ox-4,oy+18); x.fillText('1',ox+L-4,oy+18);
+    // labels
+    x.fillStyle='#3fb950';x.fillText('Σca',(ox+sx)/2-10,oy+18);
+    x.fillStyle='#d29922';x.fillText('θ',sx+8,(oy+ty)/2);
+    x.fillStyle='#bc8cff';x.fillText('|UD|',(ox+sx)/2-22,(oy+ty)/2-6);
+    // right-angle tick
+    x.strokeStyle='rgba(230,237,243,.5)';x.lineWidth=1;
+    x.strokeRect(sx-9,oy-9,9,9);
+    // aperture dot near 0.053
+    var gx=ox+L*(1-0.053), gy=oy-L*0.053;
+    x.beginPath();x.arc(ox+L*(1-0.053),oy,0,0,6.283);
+  }
+  T.addEventListener('input',draw); draw();
+})();
+</script>
+</body>
+</html>
